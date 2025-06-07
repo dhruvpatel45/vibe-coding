@@ -1,0 +1,86 @@
+{% extends 'hackathon/base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-4">
+                    <i class="fas fa-rocket"></i> Hackathon Mentor Platform
+                </h1>
+                <p class="lead mb-4">
+                    Register your team, share your progress, and get mentorship throughout your hackathon journey.
+                </p>
+                <a href="{% url 'register_team' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-users"></i> Register Your Team
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Easy Registration</h5>
+                    <p class="card-text">Register your team with detailed project information and dynamic member management.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Progress Tracking</h5>
+                    <p class="card-text">Submit regular updates with images, documents, and text descriptions of your progress.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-hands-helping fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Mentor Support</h5>
+                    <p class="card-text">Get guidance from experienced mentors who can help you succeed in your hackathon.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">How It Works</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <span class="badge bg-primary rounded-circle p-3 fs-4">1</span>
+                        </div>
+                        <h6>Register Your Team</h6>
+                        <p class="small">Fill out the registration form with your team and project details.</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <span class="badge bg-primary rounded-circle p-3 fs-4">2</span>
+                        </div>
+                        <h6>Receive Updates</h6>
+                        <p class="small">Get email notifications with secure links to submit progress updates.</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <span class="badge bg-primary rounded-circle p-3 fs-4">3</span>
+                        </div>
+                        <h6>Get Mentorship</h6>
+                        <p class="small">Connect with mentors who can guide you through your hackathon journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

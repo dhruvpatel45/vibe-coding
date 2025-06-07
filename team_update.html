@@ -1,0 +1,112 @@
+{% extends 'hackathon/base.html' %}
+
+{% block title %}Submit Update - {{ team.team_name }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-upload"></i> Submit Project Update
+                    </h3>
+                    <p class="mb-0">Team: <strong>{{ team.team_name }}</strong></p>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Project:</strong> {{ team.project_title }}<br>
+                        <strong>Leader:</strong> {{ team.leader_name }}
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label">{{ form.update_type.label }}</label>
+                            {{ form.update_type }}
+                            <div class="form-text">Choose the type of update you want to submit</div>
+                        </div>
+
+                        <div class="mb-3" id="text-content-field">
+                            <label class="form-label">{{ form.text_content.label }}</label>
+                            {{ form.text_content }}
+                            <div class="form-text">Describe your progress, challenges, and achievements</div>
+                        </div>
+
+                        <div class="mb-3" id="file-upload-field">
+                            <label class="form-label">{{ form.file_upload.label }}</label>
+                            {{ form.file_upload }}
+                            <div class="form-text">Upload images (JPG, PNG) or PDF documents</div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-paper-plane"></i> Submit Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Previous Updates -->
+            {% if previous_updates %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-history"></i> Previous Updates</h5>
+                </div>
+                <div class="card-body">
+                    {% for update in previous_updates %}
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <span class="badge bg-primary">{{ update.get_update_type_display }}</span>
+                                <small class="text-muted ms-2">{{ update.submitted_at|date:"M d, Y H:i" }}</small>
+                            </div>
+                        </div>
+                        {% if update.text_content %}
+                            <p class="mt-2 mb-1">{{ update.text_content|truncatechars:200 }}</p>
+                        {% endif %}
+                        {% if update.file_upload %}
+                            <a href="{{ update.file_upload.url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-file"></i> View File
+                            </a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const updateTypeField = document.getElementById('id_update_type');
+    const textContentField = document.getElementById('text-content-field');
+    const fileUploadField = document.getElementById('file-upload-field');
+    
+    function toggleFields() {
+        const updateType = updateTypeField.value;
+        
+        if (updateType === 'text') {
+            textContentField.style.display = 'block';
+            fileUploadField.style.display = 'none';
+        } else if (updateType === 'image' || updateType === 'pdf') {
+            textContentField.style.display = 'block';
+            fileUploadField.style.display = 'block';
+        } else {
+            textContentField.style.display = 'block';
+            fileUploadField.style.display = 'block';
+        }
+    }
+    
+    updateTypeField.addEventListener('change', toggleFields);
+    toggleFields(); // Initial call
+});
+</script>
+{% endblock %}
